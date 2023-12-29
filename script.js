@@ -17,6 +17,7 @@ window.addEventListener("load", function () {
       this.height = 190;
       this.x = 20;
       this.y = 100;
+      this.speedY = 1;
     }
 
     update() {
@@ -24,7 +25,7 @@ window.addEventListener("load", function () {
     }
 
     draw(context) {
-      context.fillRet(this.x, this.y, this.width, this.height);
+      context.fillRect(this.x, this.y, this.width, this.height);
     }
   }
 
@@ -53,5 +54,14 @@ window.addEventListener("load", function () {
   }
 
   const game = new Game(canvasEl.width, canvasEl.height);
-  
+
+  // animation loop
+  function animate() {
+    context.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    game.update();
+    game.draw(context);
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 });
